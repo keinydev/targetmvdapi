@@ -17,5 +17,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'callbacks' do 
+    context 'validation before saving the user' do
+      
+      user = FactoryBot.build(:user_without_uid)
+      
+      it 'should set uid as email' do
+        expect(user.uid).to eq('')
+        user.save
+        expect(user.uid).to eq(user.email)
+      end
+    end
+  end
 end
