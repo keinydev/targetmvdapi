@@ -48,5 +48,3 @@ jobs:
           yarn --frozen-lockfile
       - name: Run unit tests
         run: bundle exec rspec
-      - name: Run integration tests
-        run: bundle exec cucumber
