@@ -42,7 +42,7 @@ jobs:
         run: |
           sudo apt-get -yqq install libpq-dev
           bundle install --no-deployment --jobs 4 --retry 3
-          cp config/database.github.yml config/database.yml
+          cp config/database.ci.yml config/database.yml
           bundle exec rails db:create
           bundle exec rails db:migrate
           yarn --frozen-lockfile
