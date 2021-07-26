@@ -20,9 +20,5 @@ FactoryBot.define do
     password               { Faker::Internet.password(min_length: 8) } 
     gender                 { Faker::Gender.binary_type } 
     uid                    { email }
-
-    factory :user_without_uid do
-      uid { '' }
-    end
   end
 end

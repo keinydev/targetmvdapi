@@ -20,9 +20,9 @@ RSpec.describe User, type: :model do
   describe 'callbacks' do 
     context 'validation before saving the user' do
       
-      user = FactoryBot.build(:user_without_uid)
+      let!(:user) { FactoryBot.build(:user, uid: '') }
       
-      it 'should set uid as email' do
+      it 'set uid as email' do
         expect(user.uid).to eq('')
         user.save
         expect(user.uid).to eq(user.email)
