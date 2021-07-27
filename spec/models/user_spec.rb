@@ -17,5 +17,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'callbacks' do 
+    context 'validation before saving the user' do
+      
+      let!(:user) { create(:user, uid: '') }
+      
+      it 'set uid as email' do
+        expect(user.uid).to eq(user.email)
+      end
+    end
+  end
 end

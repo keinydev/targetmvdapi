@@ -1,23 +1,23 @@
 require "rails_helper"
 
-RSpec.describe "POST api/v1/users", type: :request do
+RSpec.describe "POST api/v1/users/sign_in", type: :request do
 
+  let(:user) { create(:user) }
+  
   let(:params) do {
     user: {
-      email: 'user@example.com',
-      gender: 'male',
-      password: '12345678',
-      password_confirmation: '12345678'
-    }   
+      email: user.email,
+      password: user.password
+    }    
   }
   end
 
-  subject(:signup) { post user_registration_path, params: params, as: :json }
+  subject(:signin) { post new_user_session_path, params: params, as: :json }
 
   describe 'POST Create' do
-    context 'when signup params are valid' do
+    context 'when login params is valid' do
       before do
-        signup
+        signin
       end
 
       it 'returns status 200' do
@@ -41,15 +41,20 @@ RSpec.describe "POST api/v1/users", type: :request do
       end
     end
 
-    context 'when the email is not correct' do
+    context 'when login params are invalid' do
+
       before do
-        params[:user][:email] = "is_not_valid"
-        signup
+        params[:user][:password] = "password_not_valid"
+        signin
       end
 
-      it 'does not create a user' do
+      it 'returns unathorized status 401' do
+        expect(response).to have_http_status(401)
+      end  
+
+      it 'returns error message' do
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']['email']).to eq(['is not an email']) 
+        expect(parsed_response['errors']).to eq(['Invalid login credentials. Please try again.']) 
       end
     end
   end
