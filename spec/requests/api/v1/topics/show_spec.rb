@@ -1,14 +1,11 @@
 require "rails_helper"
 
 describe "POST api/v1/topics", type: :request do
-  
-  before(:each) do
-    load "#{Rails.root}/db/seeds.rb" 
-  end
 
   describe 'GET Index' do
     context 'when the route is valid' do
       before do
+        create_list(:topic, 5)
         get api_v1_topics_path
       end
 
