@@ -9,4 +9,5 @@
 #  updated_at :datetime         not null
 #
 class Topic < ApplicationRecord
+  validates :name, presence: true, uniqueness: true
 end

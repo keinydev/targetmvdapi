@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "POST api/v1/users/sign_in", type: :request do
+describe "POST api/v1/users/sign_in", type: :request do
 
   let(:user) { create(:user) }
   

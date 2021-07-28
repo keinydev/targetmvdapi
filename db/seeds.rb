@@ -1,3 +1,5 @@
+require 'faker'
+
 topic1 = Topic.create(name: "Music",  image: Faker::LoremFlickr.image(search_terms: ['music']))
 topic2 = Topic.create(name: "Food",   image: Faker::LoremFlickr.image(search_terms: ['food']))
 topic3 = Topic.create(name: "Travel", image: Faker::LoremFlickr.image(search_terms: ['travel']))
