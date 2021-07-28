@@ -13,7 +13,7 @@ describe "POST api/v1/topics", type: :request do
       end
 
       it 'returns status 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to be_successful
       end
 
       it 'returns data attributes' do
