@@ -1,3 +1,4 @@
+require 'faker'
 # == Schema Information
 #
 # Table name: users
