@@ -13,6 +13,9 @@
 #  tokens                 :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 require 'rails_helper'
 

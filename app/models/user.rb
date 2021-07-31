@@ -13,12 +13,15 @@
 #  tokens                 :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 class User < ApplicationRecord
   extend Devise::Models
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   include DeviseTokenAuth::Concerns::User
   

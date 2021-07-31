@@ -15,8 +15,25 @@ describe "POST api/v1/users/sign_in", type: :request do
   subject(:signin) { post new_user_session_path, params: params, as: :json }
 
   describe 'POST Create' do
-    context 'when login params is valid' do
+
+    context 'when user has not confirmed the account' do
       before do
+        signin
+      end
+
+      it 'returns unathorized status 401' do
+        expect(response).to have_http_status(401)
+      end  
+
+      it 'returns error message' do
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['errors'][0]).to match('A confirmation email was sent to your account at')
+      end
+    end
+
+    context 'when login params are valid' do
+      before do
+        user.confirm
         signin
       end
 
@@ -42,8 +59,8 @@ describe "POST api/v1/users/sign_in", type: :request do
     end
 
     context 'when login params are invalid' do
-
       before do
+        user.confirm
         params[:user][:password] = "password_not_valid"
         signin
       end

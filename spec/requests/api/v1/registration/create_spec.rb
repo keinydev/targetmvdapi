@@ -8,7 +8,8 @@ describe "POST api/v1/users", type: :request do
       gender: 'male',
       password: '12345678',
       password_confirmation: '12345678'
-    }   
+    },
+    confirm_success_url: '/'
   }
   end
 
@@ -22,22 +23,6 @@ describe "POST api/v1/users", type: :request do
 
       it 'returns status 200' do
         expect(response).to have_http_status(200)
-      end
-
-      it 'returns authentication header with right attributes' do
-        expect(response.headers['access-token']).to be_present
-      end
-
-      it 'returns client in authentication header' do
-        expect(response.headers['client']).to be_present
-      end
-
-      it 'returns expiry in authentication header' do
-        expect(response.headers['expiry']).to be_present
-      end
-
-      it 'returns uid in authentication header' do
-        expect(response.headers['uid']).to be_present
       end
     end
 

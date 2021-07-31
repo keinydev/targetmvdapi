@@ -13,6 +13,7 @@ describe "DELETE api/v1/users/sign_out", type: :request do
   end
 
   before do
+    user.confirm
     post new_user_session_path, params: params, as: :json
   end
  
