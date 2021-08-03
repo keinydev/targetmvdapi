@@ -27,7 +27,7 @@ describe "POST api/v1/users/sign_in", type: :request do
 
       it 'returns error message' do
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors'][0]).to match('A confirmation email was sent to your account at')
+        expect(parsed_response['errors'].first).to match('A confirmation email was sent to your account at')
       end
     end
 
