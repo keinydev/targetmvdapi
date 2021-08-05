@@ -4,6 +4,11 @@ module Api
 
       before_action :authenticate_user!
 
+      def index
+        @targets = Target.where(user_id: current_user.id)
+        render json: { targets: @targets }, status: :ok
+      end
+
       def create
         @target = current_user.targets.build(target_params)
         if @target.save
