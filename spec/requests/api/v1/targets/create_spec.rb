@@ -5,26 +5,6 @@ describe "POST api/v1/targets", type: :request do
   let(:topic_list) { create_list(:topic, 5) } 
   let(:user) { create(:user) }
 
-  let(:params) do {
-    user: {
-      email: user.email,
-      password: user.password
-    }    
-  }
-  end
-
-  before do
-    user.confirm
-    post new_user_session_path, params: params, as: :json
-  end
- 
-  let(:headers) do {
-    'uid': response.headers['uid'],
-    'client': response.headers['client'],
-    'access-token': response.headers['access-token']
-  }
-  end
-
   let(:target_params) do {
     target: {
       title: "Meet pop lovers",
@@ -36,7 +16,7 @@ describe "POST api/v1/targets", type: :request do
   }
   end
 
-  subject(:create_target) { post api_v1_targets_path, params: target_params, headers: headers, as: :json }
+  subject(:create_target) { post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json }
 
   describe 'POST Create' do
     context 'when params are valid' do
@@ -56,7 +36,7 @@ describe "POST api/v1/targets", type: :request do
 
     context 'when the header is not correct' do
       before do
-        headers[:uid] = ""
+        auth_headers[:uid] = ""
         create_target
       end
 

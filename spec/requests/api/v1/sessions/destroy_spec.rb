@@ -3,28 +3,8 @@ require "rails_helper"
 describe "DELETE api/v1/users/sign_out", type: :request do
 
   let(:user) { create(:user) }
-  
-  let(:params) do {
-    user: {
-      email: user.email,
-      password: user.password
-    }    
-  }
-  end
 
-  before do
-    user.confirm
-    post new_user_session_path, params: params, as: :json
-  end
- 
-  let(:headers) do {
-    'uid': response.headers['uid'],
-    'client': response.headers['client'],
-    'access-token': response.headers['access-token']
-  }
-  end
-
-  subject(:signout) { delete destroy_user_session_path, headers: headers }
+  subject(:signout) { delete destroy_user_session_path, headers: auth_headers }
 
   describe 'DELETE Destroy' do
     context 'when logout params are valid' do
@@ -39,7 +19,7 @@ describe "DELETE api/v1/users/sign_out", type: :request do
 
     context 'when the header is not correct' do
       before do
-        headers[:uid] = ""
+        auth_headers[:uid] = ""
         signout
       end
 

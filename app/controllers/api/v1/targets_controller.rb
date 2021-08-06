@@ -7,7 +7,7 @@ module Api
       def create
         @target = current_user.targets.build(target_params)
         if @target.save
-          render json: { target: @target }, status: :created
+          @target
         else
           render json: { errors: @target.errors }, status: :unprocessable_entity
         end
