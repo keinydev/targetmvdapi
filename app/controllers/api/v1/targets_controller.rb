@@ -5,8 +5,7 @@ module Api
       before_action :authenticate_user!
 
       def index
-        @targets = Target.where(user_id: current_user.id)
-        render json: { targets: @targets }, status: :ok
+        @targets = current_user.targets
       end
 
       def create

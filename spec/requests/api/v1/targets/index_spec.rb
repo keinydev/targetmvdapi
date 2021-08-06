@@ -5,26 +5,6 @@ describe "GET api/v1/targets", type: :request do
   let(:topic_list) { create_list(:topic, 5) } 
   let(:user) { create(:user) }
 
-  let(:params) do {
-    user: {
-      email: user.email,
-      password: user.password
-    }    
-  }
-  end
-
-  before do
-    user.confirm
-    post new_user_session_path, params: params, as: :json
-  end
- 
-  let(:headers) do {
-    'uid': response.headers['uid'],
-    'client': response.headers['client'],
-    'access-token': response.headers['access-token']
-  }
-  end
-
   let(:target_params) do {
     target: {
       title: "Meet pop lovers",
@@ -37,10 +17,10 @@ describe "GET api/v1/targets", type: :request do
   end
 
   before do
-    post api_v1_targets_path, params: target_params, headers: headers, as: :json
+    post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json
   end 
 
-  subject(:get_target) { get api_v1_targets_path, headers: headers }
+  subject(:get_target) { get api_v1_targets_path, headers: auth_headers }
 
   describe 'GET Index' do
     context 'when params are valid' do
@@ -60,7 +40,7 @@ describe "GET api/v1/targets", type: :request do
 
     context 'when the header is not correct' do
       before do
-        headers[:uid] = ""
+        auth_headers[:uid] = ""
         get_target
       end
 
