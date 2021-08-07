@@ -1,24 +1,15 @@
-# README
+# Target MVD API (RAILS)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## _Rails 6 API edition_
 
-Things you may want to cover:
+I have created this API for learning purposes. 
 
-* Ruby version
+Thanks to Rootstrap devs for helping me to understand rails.
 
-* System dependencies
+## Links 
+- [API Documentation](https://apitargetmvd.docs.apiary.io/)
+- [Trello Guides](https://trello.com/b/6EIY1WIJ/rs-learning-camp-ruby-on-rails-edition)
 
-* Configuration
+## License
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+MIT
