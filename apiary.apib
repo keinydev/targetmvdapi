@@ -1,80 +1,329 @@
 FORMAT: 1A
 HOST: https://polls.apiblueprint.org/
 
-# targetapi
+# Target MVD API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Target MVD is an API that provides a collection of endpoints for a target mvd app, where users can match other people for meeetings purposes
 
-## Questions Collection [/questions]
+## User Creation [/api/v1/users]
 
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Sign Up [POST]
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
+    + Body
+    
+            {
+                "user":
+                {
+                    "email": "test@test.com",
+                    "gender": "female",
+                    "password": "password",
+                    "password_confirmation": "password"
+                },
+                "confirm_success_url": "/"
+            }
+            
++ Response 200 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "id": 1,
+                "email": "test@test.com",
+                "gender": "female",
+                "provider": "email",
+                "uid": "test@test.com",
+                "created_at": "2021-08-07T16:28:56.369Z",
+                "updated_at": "2021-08-07T16:28:56.369Z",
+                "allow_password_change": false
+            }         
+
+## Login [/api/v1/users/sign_in]
+
+### Login [POST]
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "user":
+                {
+                    "email": "test@test.com",
+                    "password": "password"
+                }
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+    + Body
+
+            {
+                "email": "test@test.com",
+                "uid": "test@test.com",
+                "id": 1,
+                "gender": "female",
+                "provider": "email",
+                "created_at": "2021-07-31T15:11:29.296Z",
+                "updated_at": "2021-08-07T16:30:24.531Z",
+                "allow_password_change": false
+            }
+            
+## Logout [/api/v1/users/sign_out]
+
+### Logout [DELETE]
+
++ Request (application/json)
+
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+    
++ Response 200 (application/json)       
+
+    + Body
+
+            {
+                "success": true
+            }
+            
+## Password [/api/v1/users/password]
+
+### Reset password [POST]       
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "email": "test@test.com",
+                "redirect_url": "http://localhost:3000/api/v1/headers"
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true,
+                "message": "An email has been sent to 'test@test.com' containing instructions for resetting your password."
+            }
+
+### Change password [PUT]
+
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+            
+    + Body
+
+            {
+                "currentPassword": "password",
+                "password": "12345678",
+                "password_confirmation": "12345678"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+    + Body
+
+            {
+                "success": true,
+                "data":
+                {
+                    "id": 1,
+                    "email": "test@test.com",
+                    "gender": "female",
+                    "provider": "email",
+                    "uid": "test@test.com"
+                },
+                "message": "Your password has been successfully updated."
+            }    
+            
+## Topics Collection [/api/v1/topics]
+
+### Get Topics [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+                {
+                    "id": 1,
+                    "name": "Music",
+                    "image": "https://loremflickr.com/300/300/music",
+                    "created_at": "2021-08-03T23:05:57.847Z",
+                    "updated_at": "2021-08-03T23:05:57.847Z"
+                },
+                {
+                    "id": 2,
+                    "name": "Food",
+                    "image": "https://loremflickr.com/300/300/food",
+                    "created_at": "2021-08-03T23:05:58.377Z",
+                    "updated_at": "2021-08-03T23:05:58.377Z"
+                },
+                {
+                    "id": 3,
+                    "name": "Travel",
+                    "image": "https://loremflickr.com/300/300/travel",
+                    "created_at": "2021-08-03T23:05:58.416Z",
+                    "updated_at": "2021-08-03T23:05:58.416Z"
+                },
+                {
+                    "id": 4,
+                    "name": "Art",
+                    "image": "https://loremflickr.com/300/300/art",
+                    "created_at": "2021-08-03T23:05:58.469Z",
+                    "updated_at": "2021-08-03T23:05:58.469Z"
+                },
+                {
+                    "id": 5,
+                    "name": "Dating",
+                    "image": "https://loremflickr.com/300/300/love",
+                    "created_at": "2021-08-03T23:05:58.482Z",
+                    "updated_at": "2021-08-03T23:05:58.482Z"
+                }
+            ]
+
+## Target Collection [/api/v1/targets]
+
+### Create Target [POST]
+
+Response may or may not add matched_user and match_conversation depending if there was a match or not.
+
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+    + Body
+
+            {
+                "target": {
+                    "title": "Meet pop music lovers",
+                    "latitude": 22.3129126,
+                    "longitude": 22.3129125,
+                    "radius": 3,
+                    "topic_id": 1
+                }
+            }
+            
++ Response 200 (application/json)
+   
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+   + Body
+
+            {
+                "target": {
+                    "id": 3,
+                    "title": "Meet pop music lovers",
+                    "latitude": 22.3129126,
+                    "longitude": 22.3129125,
+                    "radius": 3,
+                    "topic_id": 1
+                },
+                "match_conversation": {
+                    "id": 1,
+                    "topic_id": 1
+                },
+                "matched_user": {
+                    "id": 2,
+                    "email": "jane.doe@mail.com",
+                    "gender": "female"
+                }
+            }
+            
+### Get Targets [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+         
+
++ Response 200 (application/json)
+   
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+   + Body         
+   
+            {
+                "targets": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "id": 1,
+                        "title": "First target",
+                        "latitude": -54.2874,
+                        "longitude": 23.28394,
+                        "radius": 234,
+                        "topic_id": 2
+                    },
+                    {
+                        "id": 2,
+                        "title": "Target 2",
+                        "latitude": -53.2234,
+                        "longitude": 43.38473,
+                        "radius": 1,
+                        "topic_id": 3
+                    },
+                    {
+                        "id": 3,
+                        "title": "Meet pop music lovers",
+                        "latitude": 22.3129126,
+                        "longitude": 22.3129125,
+                        "radius": 3,
+                        "topic_id": 1
                     }
                 ]
             }
