@@ -1,4 +1,4 @@
-# Target MVD API (RAILS)
+# Target MVD API
 
 ## _Rails 6 API edition_
 
