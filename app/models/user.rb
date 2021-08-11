@@ -27,6 +27,8 @@ class User < ApplicationRecord
   
   before_validation :set_uid
 
+  has_many :targets, dependent: :destroy
+
   def set_uid 
     self[:uid] = self[:email] if self[:uid].blank? && self[:provider] == 'email'
   end
