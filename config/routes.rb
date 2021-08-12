@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
+      resources :reset_passwords, only: :index 
       resources :topics, only: :index 
       resources :targets, only: :create 
     end
