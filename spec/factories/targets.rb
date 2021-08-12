@@ -12,15 +12,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Target < ApplicationRecord
-  belongs_to :topic
-  belongs_to :user
+require 'faker'
 
-  validates :title, :radius, :latitude, :longitude, :topic_id, presence: true
-  
-  validate :user_max_targets
-
-  def user_max_targets
-    errors.add(:targets, "You are allowed to create only 3 targets") if user.targets.length >= 3
+FactoryBot.define do
+  factory :target do
+    title              { Faker::Lorem.unique.word }
+    radius             { rand(1..10) } 
+    latitude           { rand(-180.0..180.0) } 
+    longitude          { rand(-180.0..180.0) } 
   end
 end

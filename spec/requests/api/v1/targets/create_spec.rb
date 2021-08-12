@@ -45,29 +45,5 @@ describe "POST api/v1/targets", type: :request do
         expect(parsed_response['errors']).to eq(['You need to sign in or sign up before continuing.']) 
       end
     end
-
-    context 'when user add more than 3 targets' do
-      before do
-        target_params[:target][:title] = "Meet rock lovers"
-        target_params[:target][:topic_id] = topic_list[1].id
-        post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json
-      
-        target_params[:target][:title] = "Meet dog lovers"
-        target_params[:target][:topic_id] = topic_list[2].id
-        post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json    
-
-        target_params[:target][:title] = "Meet pizza lovers"
-        target_params[:target][:topic_id] = topic_list[3].id
-        post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json
-
-        target_params[:target][:title] = "This cannot be created"
-        post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json
-      end
-
-      it 'returns errors in body response' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']['targets']).to be_present
-      end      
-    end
   end
 end

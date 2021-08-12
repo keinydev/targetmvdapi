@@ -16,6 +16,7 @@
 #  confirmation_token     :string
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  allow_password_change  :boolean          default(FALSE), not null
 #
 class User < ApplicationRecord
   extend Devise::Models
