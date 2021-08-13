@@ -18,7 +18,7 @@ class Target < ApplicationRecord
 
   validates :title, :radius, :latitude, :longitude, :topic_id, presence: true
   
-  validate :user_max_targets
+  validate :user_max_targets, on: :create
 
   def user_max_targets
     errors.add(:targets, "You are allowed to create only 3 targets") if user.targets.length >= 3
