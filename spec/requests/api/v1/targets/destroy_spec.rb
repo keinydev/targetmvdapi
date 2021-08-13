@@ -12,13 +12,16 @@ describe "DELETE api/v1/targets/:id", type: :request do
 
   describe 'DELETE Destroy' do
     context 'when params are valid' do
-      before do
+      it 'returns status 204' do
         delete_target
+        expect(response).to be_successful
       end
       
-      it 'returns status 204' do
-        expect(response).to be_successful
-      end    
+      it 'destroys a target in the database' do
+        expect do
+          delete_target
+        end.to change(Target, :count).by(0)
+      end
     end
 
     context 'when the header is not correct' do

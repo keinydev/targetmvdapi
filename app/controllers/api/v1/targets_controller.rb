@@ -3,7 +3,6 @@ module Api
     class TargetsController < ApplicationController
 
       before_action :authenticate_user!
-      before_action :set_target, only: :destroy
 
       def create
         @target = current_user.targets.build(target_params)
@@ -15,7 +14,7 @@ module Api
       end  
 
       def destroy
-        @target.destroy
+        target.destroy
         head :no_content
       end 
       
@@ -25,7 +24,7 @@ module Api
         params.require(:target).permit(:title, :radius, :latitude, :longitude, :topic_id)
       end
 
-      def set_target
+      def target
         @target = Target.find(params[:id])
       end
     end
