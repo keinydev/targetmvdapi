@@ -20,6 +20,6 @@ FactoryBot.define do
     radius             { rand(1..10) } 
     latitude           { rand(-180.0..180.0) } 
     longitude          { rand(-180.0..180.0) } 
-    association        :topic
+    topic
   end
 end

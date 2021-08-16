@@ -18,7 +18,7 @@ module Api
       end  
 
       def destroy
-        target.destroy
+        target.destroy!
         head :no_content
       end 
       
