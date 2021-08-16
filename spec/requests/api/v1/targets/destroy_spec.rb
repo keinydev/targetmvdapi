@@ -2,11 +2,9 @@ require "rails_helper"
 
 describe "DELETE api/v1/targets/:id", type: :request do
 
-  let(:topic_list) { create_list(:topic, 5) } 
-
   let(:user) { create(:user) }
 
-  let(:target) { create(:target, user: user, topic: topic_list.first) }
+  let!(:target) { create(:target, user: user) }
 
   subject(:delete_target) { delete api_v1_target_path(target.id), headers: auth_headers, as: :json }
 
@@ -20,7 +18,7 @@ describe "DELETE api/v1/targets/:id", type: :request do
       it 'destroys a target in the database' do
         expect do
           delete_target
-        end.to change(Target, :count).by(0)
+        end.to change(Target, :count).by(-1)
       end
     end
 
