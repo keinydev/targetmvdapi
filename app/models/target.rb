@@ -21,6 +21,6 @@ class Target < ApplicationRecord
   validate :user_max_targets, on: :create
 
   def user_max_targets
-    errors.add(:targets, "You are allowed to create only 3 targets") if user.targets.length >= 3
+    errors.add(:targets, "You are allowed to create only 3 targets") if user.targets.count >= 3
   end
 end
