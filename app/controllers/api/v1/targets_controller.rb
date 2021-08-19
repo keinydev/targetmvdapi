@@ -57,11 +57,7 @@ module Api
       end
 
       def set_conversation(user_a, user_b)
-        if Conversation.between(user_a, user_b).present?
-          @conversation = Conversation.between(user_a, user_b).first
-        else
-          @conversation = Conversation.create!(user_a_id: user_a, user_b_id: user_b)
-        end
+        @conversation = Conversation.between(user_a, user_b).first_or_create(user_a_id: user_a, user_b_id: user_b)
       end
     end
   end
