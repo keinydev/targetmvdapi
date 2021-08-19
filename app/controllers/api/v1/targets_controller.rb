@@ -12,15 +12,19 @@ module Api
         @target = current_user.targets.build(target_params)
         if @target.save
           match = search_match(@target.radius, @target.latitude, @target.longitude, @target.topic_id)
-          matched_user = {}
-          match_conversation = {}
+          matched_user = []
+          match_conversation = []
           
           if match.size > 0
-            @conversation = set_conversation(current_user.id, match.first.user_id)
+            match.each do |matched|
+              @conversation = set_conversation(current_user.id, matched.user_id)
+              
+              m_user = { id: match.first.user_id, email: User.find(matched.user_id).email, gender: User.find(matched.user_id).gender }
+              m_conversation = { id: @conversation.id }  
 
-            matched_user = { id: match.first.user_id, email: User.find(match.first.user_id).email, gender: User.find(match.first.user_id).gender }
-
-            match_conversation = { id: @conversation.id }            
+              matched_user << m_user
+              match_conversation << m_conversation
+            end          
           end
 
           @data = { target: @target, matched_user: matched_user, match_conversation: match_conversation}

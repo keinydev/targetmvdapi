@@ -33,7 +33,7 @@ describe "GET api/v1/conversations", type: :request do
         get_conversations
       end
       
-      it 'returns status 200' do
+      it 'returns a successful response' do
         expect(response).to be_successful
       end
 

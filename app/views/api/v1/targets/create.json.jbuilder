@@ -8,11 +8,15 @@ json.target do
 end
 
 json.match_conversation do
-	json.id          @data[:match_conversation][:id]
+  json.array! @data[:match_conversation] do |conversation|
+    json.id        conversation[:id]
+  end
 end
 
 json.matched_user do  
-	json.id          @data[:matched_user][:id]
-	json.email       @data[:matched_user][:email]	
-	json.gender      @data[:matched_user][:gender]	
+  json.array! @data[:matched_user] do |user|
+		json.id         user[:id]
+		json.email      user[:email]
+		json.gender     user[:gender]
+  end
 end
