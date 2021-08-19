@@ -20,6 +20,12 @@ class Target < ApplicationRecord
   
   validate :user_max_targets, on: :create
 
+  acts_as_mappable  :default_units => :miles,
+                    :default_formula => :sphere,
+                    :distance_field_name => :distance,
+                    :lat_column_name => :latitude,
+                    :lng_column_name => :longitude
+
   def user_max_targets
     errors.add(:targets, "You are allowed to create only 3 targets") if user.targets.count >= 3
   end
