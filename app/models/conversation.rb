@@ -14,11 +14,11 @@ class Conversation < ApplicationRecord
 
   validates :user_a, uniqueness: {scope: :user_b}
 
-  scope :between, -> (user_a_id, user_b_id) do
-    where("(conversations.user_a_id = ? AND conversations.user_b_id = ?) OR (conversations.user_a_id = ? AND conversations.user_b_id = ?)", user_a_id, user_b_id, user_b_id, user_a_id)
+  scope :between, -> (user_a, user_b) do
+    where("(conversations.user_a_id = :user_a_id AND conversations.user_b_id = :user_b_id) OR (conversations.user_a_id = :user_b_id AND conversations.user_b_id = :user_a_id)", user_a_id: user_a, user_b_id: user_b)
   end
 
   scope :by_user, -> (user) do
-    where("(conversations.user_a_id = ? OR conversations.user_b_id = ?)", user, user)
+    where("(conversations.user_a_id = :user OR conversations.user_b_id = :user)", user: user)
   end
 end
