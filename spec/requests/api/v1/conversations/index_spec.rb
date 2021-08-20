@@ -2,28 +2,11 @@ require "rails_helper"
 
 describe "GET api/v1/conversations", type: :request do
 
-  let(:topic) { create(:topic) } 
-
   let(:user_a) { create(:user) }
-
-  let!(:target_1) { create(:target, user: user_a, topic: topic, longitude: 114.2219923, latitude: 22.3129115, radius: 5) }
 
   let(:user) { create(:user) }
 
-  let(:target_params) do {
-    target: {
-      title: "Meet pop lovers",
-      longitude: 114.2219993,
-      latitude: 22.3129125,
-      radius: 5,
-      topic_id: topic.id
-    }    
-  }
-  end
-
-  before do
-    post api_v1_targets_path, params: target_params, headers: auth_headers, as: :json 
-  end
+  let!(:conversation) { create(:conversation, user_a: user_a, user_b: user) }
 
   subject(:get_conversations) { get api_v1_conversations_path, headers: auth_headers, as: :json }
 
