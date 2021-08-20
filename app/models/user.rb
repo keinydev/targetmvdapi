@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   has_many :targets, dependent: :destroy
 
+  has_many :messages
+
   def set_uid 
     self[:uid] = self[:email] if self[:uid].blank? && self[:provider] == 'email'
   end

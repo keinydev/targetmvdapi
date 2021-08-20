@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       resources :reset_passwords, only: :index 
       resources :topics, only: :index 
       resources :targets, only: [:index, :create, :destroy]
-      resources :conversations, only: :index 
+      resources :conversations, only: :index do
+        resources :messages, only: :create
+      end
     end
   end
 end
