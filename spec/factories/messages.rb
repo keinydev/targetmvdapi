@@ -14,7 +14,7 @@ require 'faker'
 FactoryBot.define do
   factory :message do
     body                { Faker::Lorem.question }
-    user_id             { 1 }
-    conversation_id     { 1 }
+    conversation
+    user
   end
 end
