@@ -2,7 +2,13 @@ module Api
   module V1
     class MessagesController < ApplicationController
 
+      ITEMS_PER_PAGE = 50
+
       before_action :authenticate_user!
+
+      def index
+        @pagy, @messages = pagy(conversation.messages, page: params[:page], items: ITEMS_PER_PAGE)
+      end
 
       def create
         @message = conversation.messages.build(message_params)

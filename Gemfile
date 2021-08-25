@@ -20,6 +20,7 @@ gem 'rubocop-rails', require: false
 gem 'devise'
 gem 'devise_token_auth'
 gem 'geokit-rails'
+gem 'pagy'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

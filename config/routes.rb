@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :topics, only: :index 
       resources :targets, only: [:index, :create, :destroy]
       resources :conversations, only: :index do
-        resources :messages, only: :create
+        resources :messages, only: [:index, :create]
       end
     end
   end
