@@ -94,7 +94,6 @@ Target MVD is an API that provides a collection of endpoints for a target mvd ap
 
             access-token: sO2bm_Bpdyoo8r78jZ-fqg
             client: QADgNCWRJj0LyRruqzYbBg
-            expiry: 1489009792
             uid: test@test.com
     
 + Response 200 (application/json)       
@@ -135,7 +134,6 @@ Target MVD is an API that provides a collection of endpoints for a target mvd ap
     
             access-token: sO2bm_Bpdyoo8r78jZ-fqg
             client: QADgNCWRJj0LyRruqzYbBg
-            expiry: 1489009792
             uid: test@test.com
             
     + Body
@@ -230,7 +228,6 @@ Response may or may not add matched_user and match_conversation depending if the
     
             access-token: sO2bm_Bpdyoo8r78jZ-fqg
             client: QADgNCWRJj0LyRruqzYbBg
-            expiry: 1489009792
             uid: test@test.com
 
     + Body
@@ -284,7 +281,6 @@ Response may or may not add matched_user and match_conversation depending if the
     
             access-token: sO2bm_Bpdyoo8r78jZ-fqg
             client: QADgNCWRJj0LyRruqzYbBg
-            expiry: 1489009792
             uid: test@test.com
          
 
@@ -324,6 +320,135 @@ Response may or may not add matched_user and match_conversation depending if the
                         "longitude": 22.3129125,
                         "radius": 3,
                         "topic_id": 1
+                    }
+                ]
+            }
+            
+## Conversations [/api/v1/conversations]
+
+### Get Conversations [GET]
+            
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            uid: test@test.com
+            
++ Response 200 (application/json)
+   
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+   + Body         
+   
+            {
+                "conversations": [
+                    {
+                        "id": 1,
+                        "user": {
+                            "id": 2,
+                            "email": "jane.doe@mail.com",
+                            "gender": "female"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "user": {
+                            "id": 5,
+                            "email": "john.doe@mail.com",
+                            "gender": "male"
+                        }
+                    }
+                ]
+            }
+            
+## Messages [/api/v1/conversations/:conversation_id/messages]
+
+### Create Message [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            uid: test@test.com
+
+    + Body
+
+            {
+                "message": {
+                    "body": "Hi"
+                }
+            }
+            
++ Response 200 (application/json)
+   
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+   + Body
+
+            {
+                "message": {
+                    "id": 13,
+                    "body": "Hi"
+                }
+            }       
+            
+### Get Messages [GET]
+            
++ Request (application/json)
+
+    + Headers
+    
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            uid: test@test.com
+            
++ Response 200 (application/json)
+   
+    + Headers
+
+            access-token: sO2bm_Bpdyoo8r78jZ-fqg
+            client: QADgNCWRJj0LyRruqzYbBg
+            expiry: 1489009792
+            uid: test@test.com
+
+   + Body         
+   
+            {
+                "items": 3,
+                "total": 3,
+                "pages": 1,
+                "messages": [
+                    {
+                        "id": 1,
+                        "message": "Long time no see you!",
+                        "send_at": "2021-08-22 20:51",
+                        "user": {
+                            "id": 2,
+                            "email": "jane.doe@mail.com"
+                        }
+                    },
+                    {
+                        "id": 10,
+                        "message": "Picnic today!",
+                        "send_at": "2021-08-25 07:11",
+                        "user": {
+                            "id": 5,
+                            "email": "mister.doe@mail.com"
+                        }
                     }
                 ]
             }
