@@ -16,6 +16,8 @@ class Conversation < ApplicationRecord
 
   validates :user_a, uniqueness: {scope: :user_b}
 
+  ITEMS_PER_PAGE = 50
+
   scope :between, -> (user_a, user_b) do
     where("(conversations.user_a_id = :user_a_id AND conversations.user_b_id = :user_b_id) OR (conversations.user_a_id = :user_b_id AND conversations.user_b_id = :user_a_id)", user_a_id: user_a, user_b_id: user_b)
   end

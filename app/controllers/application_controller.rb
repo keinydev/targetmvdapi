@@ -7,8 +7,6 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :render_parameter_missing
   rescue_from ActionDispatch::Http::Parameters::ParseError, with: :render_parse_error        
 
-  $ITEMS_PER_PAGE = 50
-
   private
 
   def render_not_found(exception)
