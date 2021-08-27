@@ -21,9 +21,8 @@ describe "GET api/v1/conversations", type: :request do
       end
 
       it 'returns conversations key in body response' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['conversations']).to be_present
-        expect(parsed_response.length).to eq(1)
+        expect(json_response['conversations']).to be_present
+        expect(json_response.length).to eq(1)
       end      
     end
 
@@ -34,8 +33,7 @@ describe "GET api/v1/conversations", type: :request do
       end
 
       it 'returns an error message' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq(['You need to sign in or sign up before continuing.']) 
+        expect(json_response['errors']).to eq(['You need to sign in or sign up before continuing.']) 
       end
     end
   end

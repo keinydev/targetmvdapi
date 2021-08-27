@@ -33,8 +33,7 @@ describe "GET api/v1/targets", type: :request do
       end
 
       it 'returns targets' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response).not_to be_empty
+        expect(json_response).not_to be_empty
       end      
     end
 
@@ -45,8 +44,7 @@ describe "GET api/v1/targets", type: :request do
       end
 
       it 'returns an error message' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq(['You need to sign in or sign up before continuing.']) 
+        expect(json_response['errors']).to eq(['You need to sign in or sign up before continuing.']) 
       end
     end
   end

@@ -24,8 +24,7 @@ describe "DELETE api/v1/users/sign_out", type: :request do
       end
 
       it 'returns an error message' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq(['User was not found or was not logged in.']) 
+        expect(json_response['errors']).to eq(['User was not found or was not logged in.']) 
       end
     end
   end

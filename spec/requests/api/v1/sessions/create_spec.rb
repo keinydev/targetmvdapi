@@ -70,8 +70,7 @@ describe "POST api/v1/users/sign_in", type: :request do
       end  
 
       it 'returns error message' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq(['Invalid login credentials. Please try again.']) 
+        expect(json_response['errors']).to eq(['Invalid login credentials. Please try again.']) 
       end
     end
   end

@@ -33,8 +33,7 @@ describe "POST api/v1/users", type: :request do
       end
 
       it 'does not create a user' do
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']['email']).to eq(['is not an email']) 
+        expect(json_response['errors']['email']).to eq(['is not an email']) 
       end
     end
   end

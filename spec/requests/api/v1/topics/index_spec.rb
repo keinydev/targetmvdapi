@@ -14,15 +14,13 @@ describe "GET api/v1/topics", type: :request do
       end
 
       it 'returns first data row attributes' do
-        parsed_response = JSON.parse(response.body) 
-        expect(parsed_response[0]['id']).to be_present
-        expect(parsed_response[0]['name']).to be_present
-        expect(parsed_response[0]['image']).to be_present
+        expect(json_response[0]['id']).to be_present
+        expect(json_response[0]['name']).to be_present
+        expect(json_response[0]['image']).to be_present
       end
 
       it "returns the total data generated" do
-        parsed_response = JSON.parse(response.body) 
-        expect(parsed_response.length).to eq(5)
+        expect(json_response.length).to eq(5)
       end
     end
   end
