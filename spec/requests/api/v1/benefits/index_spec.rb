@@ -13,13 +13,13 @@ describe "GET api/v1/benefits", type: :request do
     end
 
     it 'returns first data row attributes' do
-      expect(json_response[0]['id']).to be_present
-      expect(json_response[0]['name']).to be_present
-      expect(json_response[0]['price']).to be_present
+      expect(json_response['benefits'][0]['id']).to be_present
+      expect(json_response['benefits'][0]['name']).to be_present
+      expect(json_response['benefits'][0]['price']).to be_present
     end
 
     it "returns the total data generated" do
-      expect(json_response.length).to eq(10)
+      expect(json_response['benefits'].length).to eq(10)
     end
   end
 end

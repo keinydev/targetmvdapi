@@ -3,8 +3,7 @@ module Api
     class BenefitsController < ApplicationController
 
       def index
-        @benefits = Benefit.all 
-        render json: @benefits
+        @benefits = Benefit.all
       end         
     end
   end
