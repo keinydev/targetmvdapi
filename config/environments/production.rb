@@ -111,7 +111,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: 'targetmvdapi.herokuapp.com', protocol: 'https'}
+  config.action_mailer.default_url_options = { host: ENV['BASE_HOST'], protocol: 'https'}
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
@@ -119,7 +119,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'targetmvdapi.herokuapp.com',
+    :domain         => ENV['BASE_HOST'],
     :enable_starttls_auto => true
   }
 end
