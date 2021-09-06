@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1, defaults: { format: :json } do
       resources :reset_passwords, only: :index 
       resources :topics, only: :index 
+      resources :benefits, only: :index 
       resources :targets, only: [:index, :create, :destroy]
       resources :conversations, only: :index do
         resources :messages, only: [:index, :create]
